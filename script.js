@@ -1,79 +1,74 @@
+window.onload = function(){
 
-
-window.onload= function(){
-
-    let leftPart = ` `;
-    let rightPart = ` `;
     let selectedOperator = ` `;
+    let leftPart = 0;
+    let rightPart = 0;
 
-    let number = document.querySelectorAll(".num");
-    for(let i = 0; i< numbers.length; i++) {
-        numbers[i].add.EventListener("click", function()){
-            if(this.value == `.`){
-            return;
-        }
-        document.getElementById("result").innerHTML += this.value;
+
+    let numbers = document.querySelectorAll(".num");
+    for(let i =0; i < numbers.length; i++) {
+    numbers[i].addEventListener("click", function(){
+
+        document.getElementById(`resultInner`).innerHTML += this.value;
+        
         if(selectedOperator == ` `){
-            leftPart+= this.value;
-        } else if(selectedOperator !=  ` `){
-            rightPart += this.value;
+            leftPart += this.value;
+            // alert(leftPart);
         }
-    }, false);
 
-    let operators = document.querySelectorAll(".operator")
-    for(let i = 0; i< operators.length; i++){
-        operators[i].addEventListener("click", function(){
-            return;
-        })
-        document.getElementById("result").innerHTML += this.value;
-        selectedOperator = this.value;
+        else if(selectedOperator!== ` `){
+            rightPart += this.value;
+            //alert(rightPart);
+        }
+        
     },false);
+
     }
-    if (document.getElementById("result").innerHTML === "") {
-        output = document.getElementById("result").innerHTML = '0.';
-      } else if (document.getElementById("result").innerHTML === output) {
-        document.getElementById("result").innerHTML = document.getElementById("result").innerHTML + '.';
-      }
-    }, false);
 
+    let operators = document.querySelectorAll(".operator");
+    for (let i =0; i < operators.length; i++) {
+    operators[i].addEventListener("click", function(){
 
+    document.getElementById(`resultInner`).innerHTML += this.value;
+
+        selectedOperator = this.value;
+
+    },false);
+
+    }
     document.getElementById("equation").addEventListener("click", function() {
+        if(selectedOperator == `+`)
+       { document.getElementById(`resultInner`).innerHTML = parseInt(leftPart) + parseInt(rightPart);
 
-      var calculationResult = 0;
+       } 
+       else  if(selectedOperator == `-`)
+       {document.getElementById(`resultInner`).innerHTML = parseInt(leftPart) - parseInt(rightPart);
+           
+       } 
+       else if(selectedOperator == `*`)
+       {document.getElementById(`resultInner`).innerHTML = parseInt(leftPart) * parseInt(rightPart);
 
-                //parseInt yerine parseFloat kullandım
-      // 5 bölü 2 nin sonucu tam sayı olmadığı için viegüllü olduğunu görebilmemiz için
-      
-      if (selectedOperator == '+') {
-        calculationResult = parseFloat(leftPart) + parseFloat(rightPart);
-      } else if (selectedOperator == '-') {
-        calculationResult = parseFloat(leftPart) - parseFloat(rightPart);
-      } else if (selectedOperator == '*') {
-        calculationResult = parseFloat(leftPart) * parseFloat(rightPart);
-      } else if (selectedOperator == '/') {
-        calculationResult = parseFloat(leftPart) / parseFloat(rightPart);
-      }
+           
+       } 
+       else if(selectedOperator == `/`)
+       {document.getElementById(`resultInner`).innerHTML = parseInt(leftPart) / parseInt(rightPart);
+
+           
+       } 
+
+     }, false);
+
+     document.getElementById("delete").addEventListener("click", function() {
+          selectedOperator = ` `;
+          leftPart = ` `;
+          rightPart =` `;
+
+        document.getElementById(`resultInner`).innerHTML = ` `;
 
 
-      document.getElementById("result").innerHTML = calculationResult;
 
-      leftPart = '';
-      rightPart = '';
-      selectedOperator = '';
     }, false);
 
 
-    document.getElementById("delete").addEventListener("click", function() {
-      document.getElementById("result").innerHTML = '';
 
-      leftPart = '';
-      rightPart = '';
-      selectedOperator = '';
-    }, false);
-  }
-
-
-
-
-
-
+}
